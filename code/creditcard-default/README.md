@@ -1,5 +1,10 @@
-# Credit Risk Analysis
-## Spark Machine Learning (Random Forest) 
+# Credit Card Default Analysis
+## Spark Machine Learning (Random Forest and GBT)
+
+### The Dataset
+The main goal of this example is to build 2 models using Random Forest and GBT algorithms
+
+https://www.kaggle.com/xpuspus/uci-credit-default-prediction
 
 
 
@@ -25,4 +30,9 @@ spark-submit \
 
 # Acknowledge
 The original author of this tutorial is **Carol McDonald <caroljmcdonald@gmail.com>** for the MapR article: [Predicting Loan Credit Risk using Apache Spark Machine Learning Random Forests](https://mapr.com/blog/predicting-loan-credit-risk-using-apache-spark-machine-learning-random-forests/), 
-I updated the API version (Spark 2.1.2) and made changes on the code to clarify/reduce duplication.  
+
+**Gustavo Arjones <arjones>** updated the API version (Spark 2.1.2) and made changes on the code to clarify/reduce duplication.
+  
+We've made some modifications in order use the new dataset for Credit Card Default Analysis, and also included a new GBT model to compare results from both.
+  
+
