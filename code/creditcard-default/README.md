@@ -2,15 +2,19 @@
 ## Spark Machine Learning (Random Forest and GBT)
 
 ### Objetivo
-El objetivo principal de este ejemplo es construir 1 modelo de clasificación que permita predecir si un usuario de Tarjeta de Crédito entrará o no en default de pagos en el próximo ciclo de facturación. Para ello se implementaron 2 algoritmos de clasificación (Random Forest and GBT) provedos por la librera MLLIB.
+El objetivo principal de este ejemplo es construir 1 modelo de clasificación que permita predecir si un usuario de Tarjeta de Crédito entrará o no en default de pagos en el próximo ciclo de facturación. Para ello se implementaron 2 algoritmos de clasificación (Random Forest and GBT) provedos por la librería MLLIB.
 
 ### El Dataset
-Los datos pertenecen al dataset público UCI_credit_default_prediction. El mismo junto con otros detalles puede encontrarse en https://www.kaggle.com/xpuspus/uci-credit-default-prediction
+Los datos pertenecen al dataset público UCI_credit_default_prediction. El mismo junto con otros detalles puede encontrarse en https://www.kaggle.com/xpuspus/uci-credit-default-prediction.
+
+Dicho dataset fue partido en dos conjuntos (uno para training y otro que se utiliza para aplicar el modelo posteriormente). Los mismos se encuentran guardados en:
+**Training del Modelo:** /dataset/creditcard-default/UCI_Credit_Card_Train.csv
+**Input de Datos:** /dataset/creditcard-default/UCI_Credit_Card_Input.csv
 
 
 ### Ejecución
 
-Compilar el código:
+Compilar el código en code/creditcard-default/:
 ```bash
 sbt clean assembly
 ```
@@ -59,11 +63,6 @@ Aplicar el modelo al conjunto de datos de INPUT:
     /dataset/creditcard-default-boost.model
 ```
 
-# Acknowledge
-The original author of this tutorial is **Carol McDonald <caroljmcdonald@gmail.com>** for the MapR article: [Predicting Loan Credit Risk using Apache Spark Machine Learning Random Forests](https://mapr.com/blog/predicting-loan-credit-risk-using-apache-spark-machine-learning-random-forests/), 
-
-**Gustavo Arjones <arjones>** updated the API version (Spark 2.1.2) and made changes on the code to clarify/reduce duplication.
-  
-We've made some modifications in order use the new dataset for Credit Card Default Analysis, and also included a new GBT model to compare results from both.
-  
-
+## Alumnos
+Oyhenard, Pablo
+Rossi, Andrés
