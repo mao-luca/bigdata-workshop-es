@@ -27,7 +27,7 @@ object CreditCardDefaultTrain extends DatasetUtil {
       System.exit(1)
     }
 
-    //CAMBIAR CUANDO COMPILE LA CLASE!
+    //Para correr en consola
     //val Array(datasource, modelPath) = Array("/dataset/creditcard-default/UCI_Credit_Card_Train.csv",
     //      "/dataset/creditcard-default.model")
 
@@ -43,17 +43,10 @@ object CreditCardDefaultTrain extends DatasetUtil {
 
     import spark.implicits._
 
+    //Cargar, Verificar y Vectorizar Dataset
     val creditDF = loadTrainData(datasource)
     creditDF.printSchema
     creditDF.show
-
-    // creditDF.createOrReplaceTempView("credit")
-    // spark.sql("SELECT creditability, avg(balance) as avg_balance, avg(amount) as avg_amount,
-    // avg(duration) as avg_duration  FROM credit GROUP BY creditability").show
-
-    creditDF.describe("limit_bal").show
-    creditDF.groupBy("default").agg(avg('limit_bal), avg('pay_0), avg('bill_amt1)).show
-
 
     val dfVector = vectorizeInput(creditDF)
 
@@ -84,10 +77,10 @@ object CreditCardDefaultTrain extends DatasetUtil {
     val evaluator = new BinaryClassificationEvaluator().setLabelCol("label")
     val accuracy = evaluator.evaluate(predictions)
     println(f"Accuracy: $accuracy%2.3f")
-    printPredictionMetrics(predictions)
 
 
-    // Let's try to do better
+
+    // Let's try to do better - Pipeline Fitted Model
     val paramGrid = new ParamGridBuilder().
       addGrid(classifier.maxBins, Array(20, 40)).
       addGrid(classifier.maxDepth, Array(2, 10)).
@@ -125,36 +118,33 @@ object CreditCardDefaultTrain extends DatasetUtil {
          |
       """.stripMargin)
 
-    printPredictionMetrics(predictions2)
+    println("=" * 30)
+    println("Summary of the 2 Executions\n")
 
+    println("Initial (single) run")
+    println(f"Accuracy: $accuracy%2.3f")
 
-    // Save the model to latter use
+    println("Pipeline fitting with GridSearch optimization")
+    println(f"Accuracy: $accuracy2%2.3f")
+
+    // Salvar el modelo
+
+    println("Saving model for further application")
+
+    println(model.toDebugString)
     model.write.overwrite().save(modelPath)
 
-    // load it again
-    // val sameModel = RandomForestClassificationModel.load("data/credit.model")
+    /*
+    TODO: save the best model (or both). If this is done then CrediCardDefaultAnalysis should be adapted to apply also a CrossValidatorModel
+    if (accuracy > accuracy2) {
+      model.write.overwrite().save(modelPath)
 
+    } else {
+      pipelineFittedModel.write.overwrite().save(modelPath)
+
+    }
+    */
   }
 
-  def printPredictionMetrics(predictions: DataFrame)(implicit spark: SparkSession) {
-    // Extract PREDICTED and CORRECT (label) values
-    import spark.implicits._
-    val predictionAndObservations = predictions.select('prediction, 'label)
-    val rdd = predictionAndObservations.rdd.map(r => (r.getDouble(0), r.getDouble(1)))
-
-    // Calculate the Quality Metrics
-    val rm = new RegressionMetrics(rdd)
-    val msg =
-      s"""
-         |MSE:           ${rm.meanSquaredError}
-         |MAE:           ${rm.meanAbsoluteError}
-         |RMSE Squared:  ${rm.rootMeanSquaredError}
-         |R Squared:     ${rm.r2}
-         |Exp. Variance: ${rm.explainedVariance}
-         |
-      """.stripMargin
-
-    println(msg)
-  }
 }
 

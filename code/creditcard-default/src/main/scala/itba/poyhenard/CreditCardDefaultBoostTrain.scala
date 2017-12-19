@@ -28,7 +28,7 @@ object CreditCardDefaultBoostTrain extends DatasetUtil {
       System.exit(1)
     }
 
-    //CAMBIAR CUANDO COMPILE LA CLASE!
+    //Para correr en consola
     //val Array(datasource, modelPath) = Array("/dataset/creditcard-default/UCI_Credit_Card_Train.csv",
     //      "/dataset/creditcard-default-boost.model")
 
@@ -66,19 +66,26 @@ object CreditCardDefaultBoostTrain extends DatasetUtil {
 
 
     val model = classifier.fit(trainingData)
-    println(model.toDebugString)
 
     println("=" * 30)
-    println("Before pipeline fitting\n")
+    println("Model obtained is:\n")
+    println(model.toDebugString)
+
+    println("Prediction for test data is:\n")
     val predictions = model.transform(testData)
     predictions.show
 
+    // Usando Multiclass Evaluator para obtener la accuracy.
     val evaluator = new MulticlassClassificationEvaluator().
     setLabelCol("label").
     setPredictionCol("prediction").
     setMetricName("accuracy")
 
     val accuracy = evaluator.evaluate(predictions)
+
+    println("=" * 30)
+    println("Model Summary\n")
+
     println(f"Accuracy: $accuracy%2.3f")
     println("Test Error = " + (1.0 - accuracy))
 
