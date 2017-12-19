@@ -10,27 +10,54 @@ Los datos pertenecen al dataset público UCI_credit_default_prediction. El mismo
 
 ### Ejecución
 
-#### MODELO 1 - Random Forest
+Compilar el código:
 ```bash
 sbt clean assembly
-
-spark-submit \
-  --class es.arjon.CreditRiskTrain \
-  --master 'local[*]' \
-  target/scala-2.11/credit-risk-analysis-assembly-0.1.jar \
-  /dataset/credit-risk/germancredit.csv \
-  /dataset/credit-risk.model
-    
-
-
-spark-submit \
-  --class es.arjon.CreditRiskAnalysis \
-  --master 'local[*]' \
-  target/scala-2.11/credit-risk-analysis-assembly-0.1.jar \
-  /dataset/credit-risk/germancredit-user-input.csv \
-  /dataset/credit-risk.model
 ```
+
+#### MODELO 1 - Random Forest
+
+Crear el modelo y entrenar:
+```bash
+  spark-submit \
+    --class itba.poyhenard.CreditCardDefaultTrain \
+    --master 'local[*]' \
+    target/scala-2.11/credit-card-default-predictor-assembly-0.1.jar \
+    /dataset/creditcard-default/UCI_Credit_Card_Train.csv \
+    /dataset/creditcard-default.model
+```
+
+Aplicar el modelo al conjunto de datos de INPUT:
+```bash
+  spark-submit \
+    --class itba.poyhenard.CreditCardDefaultAnalysis \
+    --master 'local[*]' \
+    target/scala-2.11/credit-card-default-predictor-assembly-0.1.jar \
+    /dataset/creditcard-default/UCI_Credit_Card_Input.csv \
+    /dataset/creditcard-default.model
+```
+
 #### MODELO 2 - GBT
+
+Crear el modelo y entrenar:
+```bash
+  spark-submit \
+    --class itba.poyhenard.CreditCardDefaultBoostTrain \
+    --master 'local[*]' \
+    target/scala-2.11/credit-card-default-predictor-assembly-0.1.jar \
+    /dataset/creditcard-default/UCI_Credit_Card_Train.csv \
+    /dataset/creditcard-default-boost.model
+```
+
+Aplicar el modelo al conjunto de datos de INPUT:
+```bash
+  spark-submit \
+    --class itba.poyhenard.CreditCardDefaultBoostAnalysis \
+    --master 'local[*]' \
+    target/scala-2.11/credit-card-default-predictor-assembly-0.1.jar \
+    /dataset/creditcard-default/UCI_Credit_Card_Input.csv \
+    /dataset/creditcard-default-boost.model
+```
 
 # Acknowledge
 The original author of this tutorial is **Carol McDonald <caroljmcdonald@gmail.com>** for the MapR article: [Predicting Loan Credit Risk using Apache Spark Machine Learning Random Forests](https://mapr.com/blog/predicting-loan-credit-risk-using-apache-spark-machine-learning-random-forests/), 
