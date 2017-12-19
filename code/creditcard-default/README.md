@@ -5,7 +5,7 @@
 El objetivo principal de este ejemplo es construir 1 modelo de clasificación que permita predecir si un usuario de Tarjeta de Crédito entrará o no en default de pagos en el próximo ciclo de facturación. Para ello se implementaron 2 algoritmos de clasificación (Random Forest and GBT) provedos por la librera MLLIB.
 
 ### El Dataset
-Los datos pertenecen al dataset público UCI_credit_default_prediction. El mismo junto con otros detalles puede encontrarse en mhttps://www.kaggle.com/xpuspus/uci-credit-default-prediction
+Los datos pertenecen al dataset público UCI_credit_default_prediction. El mismo junto con otros detalles puede encontrarse en https://www.kaggle.com/xpuspus/uci-credit-default-prediction
 
 
 ### Ejecución
