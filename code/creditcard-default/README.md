@@ -1,13 +1,16 @@
 # Credit Card Default Analysis
 ## Spark Machine Learning (Random Forest and GBT)
 
-### The Dataset
-The main goal of this example is to build 2 models using Random Forest and GBT algorithms
+### Objetivo
+El objetivo principal de este ejemplo es construir 1 modelo de clasificación que permita predecir si un usuario de Tarjeta de Crédito entrará o no en default de pagos en el próximo ciclo de facturación. Para ello se implementaron 2 algoritmos de clasificación (Random Forest and GBT) provedos por la librera MLLIB.
 
-https://www.kaggle.com/xpuspus/uci-credit-default-prediction
+### El Dataset
+Los datos pertenecen al dataset público UCI_credit_default_prediction. El mismo junto con otros detalles puede encontrarse en mhttps://www.kaggle.com/xpuspus/uci-credit-default-prediction
 
 
+### Ejecución
 
+#### MODELO 1 - Random Forest
 ```bash
 sbt clean assembly
 
@@ -27,6 +30,7 @@ spark-submit \
   /dataset/credit-risk/germancredit-user-input.csv \
   /dataset/credit-risk.model
 ```
+#### MODELO 2 - GBT
 
 # Acknowledge
 The original author of this tutorial is **Carol McDonald <caroljmcdonald@gmail.com>** for the MapR article: [Predicting Loan Credit Risk using Apache Spark Machine Learning Random Forests](https://mapr.com/blog/predicting-loan-credit-risk-using-apache-spark-machine-learning-random-forests/), 
