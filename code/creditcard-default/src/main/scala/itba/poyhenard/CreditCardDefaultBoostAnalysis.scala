@@ -21,7 +21,7 @@ object CreditCardDefaultBoostAnalysis extends DatasetUtil {
       System.exit(1)
     }
 
-    //CAMBIAR CUANDO COMPILE LA CLASE!
+    //Para correr en consola
     //val Array(datasource, modelPath) = Array("/dataset/creditcard-default/UCI_Credit_Card_Input.csv",
     //  "/dataset/creditcard-default-boost.model")
 
