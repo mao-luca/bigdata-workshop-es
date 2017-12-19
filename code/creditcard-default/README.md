@@ -64,5 +64,6 @@ Aplicar el modelo al conjunto de datos de INPUT:
 ```
 
 ## Alumnos
-Oyhenard, Pablo
-Rossi, Andrés
+
+- Oyhenard, Pablo
+- Rossi, Andrés
